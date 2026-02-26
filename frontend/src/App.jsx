@@ -5,10 +5,11 @@ function App() {
   const [jobs, setJobs] = useState([]);
   const [company, setCompany] = useState("");
   const [role, setRole] = useState("");
-  const [jobLink, setJobLink] = useState("");
+  //const [jobLink, setJobLink] = useState("");
+  const API = import.meta.env.VITE_API_URL;
 
   const fetchJobs = async () => {
-    const res = await axios.get("https://job-application-tracker-p3nu.onrender.com/jobs");
+    const res = await axios.get(`${API}/jobs`);
     setJobs(res.data);
   };
 
@@ -19,32 +20,32 @@ function App() {
   const addJob = async () => {
     if (!company || !role) return alert("Fill all fields");
 
-    await axios.post("https://job-application-tracker-p3nu.onrender.com/jobs", { company, role });
+    await axios.post(`${API}/jobs`, { company, role });
     setCompany("");
     setRole("");
     fetchJobs();
   };
 
   const updateStatus = async (id, status) => {
-    await axios.put(`https://job-application-tracker-p3nu.onrender.com/jobs/${id}`, { status });
+    await axios.put(`${API}/jobs/${id}`, { status });
     fetchJobs();
   };
 
   const deleteJob = async (id) => {
-    await axios.delete(`https://job-application-tracker-p3nu.onrender.com/jobs/${id}`);
+    await axios.delete(`${API}/jobs/${id}`);
     fetchJobs();
   };
 
-  const addFromLink = async () => {
-    if (!jobLink) return alert("Paste job link");
+  // const addFromLink = async () => {
+  //   if (!jobLink) return alert("Paste job link");
 
-    await axios.post("https://job-application-tracker-p3nu.onrender.com/jobs/from-link", {
-      url: jobLink,
-    });
+  //   await axios.post(`${API}/jobs/from-link`, { url: jobLink });, {
+  //     url: jobLink,
+  //   });
 
-    setJobLink("");
-    fetchJobs();
-  };
+  //   setJobLink("");
+  //   fetchJobs();
+  // };
 
   const getStatusStyle = (status) => {
     switch (status) {
