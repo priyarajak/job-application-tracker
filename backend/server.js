@@ -19,7 +19,8 @@ app.use("/jobs", require("./routes/jobRoutes"))
 app.get("/",(req,res)=> {
     res.send("Job Tracker App running");
 });
+const PORT = process.env.PORT || 5001;
 
-app.listen(process.env.PORT || 5001, () => {
-    console.log("Server Running on Port " + process.env.PORT);
-  });
+app.listen(PORT, () => {
+  console.log("Server Running on Port " + PORT);
+});
