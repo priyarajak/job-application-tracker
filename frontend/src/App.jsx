@@ -8,7 +8,7 @@ function App() {
   const [jobLink, setJobLink] = useState("");
 
   const fetchJobs = async () => {
-    const res = await axios.get("http://localhost:5001/jobs");
+    const res = await axios.get("https://job-application-tracker-p3nu.onrender.com/jobs");
     setJobs(res.data);
   };
 
@@ -19,26 +19,26 @@ function App() {
   const addJob = async () => {
     if (!company || !role) return alert("Fill all fields");
 
-    await axios.post("http://localhost:5001/jobs", { company, role });
+    await axios.post("https://job-application-tracker-p3nu.onrender.com/jobs", { company, role });
     setCompany("");
     setRole("");
     fetchJobs();
   };
 
   const updateStatus = async (id, status) => {
-    await axios.put(`http://localhost:5001/jobs/${id}`, { status });
+    await axios.put(`https://job-application-tracker-p3nu.onrender.com/jobs/${id}`, { status });
     fetchJobs();
   };
 
   const deleteJob = async (id) => {
-    await axios.delete(`http://localhost:5001/jobs/${id}`);
+    await axios.delete(`https://job-application-tracker-p3nu.onrender.com/jobs/${id}`);
     fetchJobs();
   };
 
   const addFromLink = async () => {
     if (!jobLink) return alert("Paste job link");
 
-    await axios.post("http://localhost:5001/jobs/from-link", {
+    await axios.post("https://job-application-tracker-p3nu.onrender.com/jobs/from-link", {
       url: jobLink,
     });
 
